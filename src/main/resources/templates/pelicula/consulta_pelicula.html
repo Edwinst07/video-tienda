@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="plantillas/principal :: head"></head>
+<body>
+	<header th:replace="plantillas/principal :: header"></header>
+	
+	<div class="container  py-4">
+
+		<div class="card bg-light">
+			<div class="card-header">
+				<h3 class="text-secondary" th:text="${titulo}"></h3>
+			</div>
+			<div class="card-body">
+				<h4 class="card-title">
+				</h4>				
+				
+				<img th:src="@{/uploads/} + ${pelicula.caratula}" th:alt="${pelicula.caratula}" 
+					class="img-thumbnail rounded float-left" style="max-width: 20%;" 
+					th:if="${#strings.length(pelicula.caratula) > 0}" />
+				
+				<ul class="list-group">
+					<li class="list-group-item" th:text="${'Título: ' + pelicula.titulo}"></li>
+					<li class="list-group-item" th:text="${'Género: ' + pelicula.genero}"></li>
+					<li class="list-group-item" th:text="${'Año estreno: ' + pelicula.anioEstreno}"></li>
+ 					<li class="list-group-item" th:text="${'Disponible: ' + (pelicula.disponible ? 'Si' : 'No')}"></li>
+				</ul>
+				
+			</div>
+		</div>
+	</div>
+	<footer th:replace="plantillas/principal :: footer"></footer>		
+</body>
+</html>

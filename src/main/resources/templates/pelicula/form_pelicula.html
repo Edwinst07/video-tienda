@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="plantillas/principal :: head"></head>
+<body>
+	<header th:replace="plantillas/principal :: header"></header>
+	
+	<div class="container py-4 ">
+		<div class="card bg-light">
+			<div class="card-header">
+				<h3 class="text-secondary" th:text="${titulo}"></h3>
+			</div>
+			<div class="card-body">
+			
+				<form th:action="@{/videotienda/actualizarpelicula}" 
+					th:object="${pelicula}" method="post"
+					enctype="multipart/form-data">
+
+					<div class="form-group">
+						<label>Título</label> 
+						<input type="text" th:field="*{titulo}" class="form-control form-control-sm" /> 
+						<small class="form-text text-danger"
+							th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></small>
+					</div>
+					
+					<div class="form-group">
+						<label>Género</label>
+						<select th:field="*{genero}" class="form-control form-control-sm">
+							<option value="">Seleccionar...</option>
+							<option value="Ciencia ficción">Ciencia ficción</option>
+							<option value="Acción">Acción</option>
+							<option value="Animación">Animación</option>
+							<option value="Terror">Terror</option>
+							<option value="Musical">Musical</option>
+							<option value="Drama">Drama</option>
+						</select>
+						<small class="form-text text-danger"
+							th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></small>
+					</div>
+
+					<div class="form-group">
+						<label>Año de estreno</label> 
+						<input type="number" th:field="*{anioEstreno}" class="form-control form-control-sm" /> 
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('anioEstreno')}"
+							th:errors="*{anioEstreno}"></small>
+					</div>
+					
+					<div class="form-group">
+					  <div class="form-check form-check-inline">
+					    <input type="checkbox" class="form-check-input" th:field="*{disponible}" />
+					    <label class="form-check-label">Disponible</label>
+					  </div>
+					</div>
+					
+					<div class="form-group">
+						<label for="file">Carátula</label>
+						<input type="file" name="file" id="file" 
+							class="form-control form-control-sm" />
+					</div>
+
+					<div>
+						<input type="submit" th:value="${accion} + ' película'"
+							class="btn btn-info btn-sm" />
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="plantillas/principal :: footer"></footer>
+</body>
+</html>

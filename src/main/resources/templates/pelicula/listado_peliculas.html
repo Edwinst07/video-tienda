@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="plantillas/principal :: head"></head>
+<body>
+	<header th:replace="plantillas/principal :: header"></header>
+	
+	<div class="container  py-4">
+
+		<div class="card bg-light">
+			<div class="card-header">
+				<h3 class="text-secondary" th:text="${titulo}"></h3>
+			</div>
+			<div class="card-body">
+				<h4 class="card-title">
+					<a class="btn btn-outline-info btn-sm" 
+						th:href="@{/videotienda/nuevapelicula}">Nueva película</a>
+				</h4>
+				<table class="table table-striped table-sm">
+					<tr>
+						<th>Id.</th>
+						<th>Título</th>
+						<th>Género</th>
+						<th>Año estreno</th>
+						<th>Disponible</th>
+						<th colspan="3" style="text-align: center">Acciones</th>
+					</tr>
+					<tr th:each="pel : ${peliculas}">
+						<td><a th:href="@{/videotienda/consultarpelicula/} + ${pel.id}" 
+							th:text="${pel.id}" class="btn btn-outline-primary btn-sm"></a></td>
+						<td th:text="${pel.titulo}"></td>
+						<td th:text="${pel.genero}"></td>
+						<td th:text="${pel.anioEstreno}" style="padding-left: 10px;"></td>
+						<td th:text="${pel.disponible ? 'Si' : 'No'}" style="padding-left: 10px;"></td>
+						
+						<td><a th:href="@{/videotienda/modificarpelicula/} + ${pel.id}" 
+							class="btn btn-sm btn-outline-warning">modificar</a></td>
+						<td><a th:href="@{/videotienda/eliminarpelicula/} + ${pel.id}" 
+							onclick="return confirm('Está seguro de elminar la película ?')"
+							class="btn btn-sm btn-outline-danger">eliminar</a></td>
+						
+					</tr>
+				</table>
+				<nav th:replace="plantillas/paginador :: navegador"></nav>
+			</div>
+		</div>
+	</div>
+	
+	<footer th:replace="plantillas/principal :: footer"></footer>
+</body>
+</html>
